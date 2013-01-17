@@ -1,25 +1,25 @@
 module.exports = function(grunt) {
-  "use strict";
-  
-  grunt.loadNpmTasks('grunt-wieldyjs');
 
   // Project configuration.
   grunt.initConfig({
     test: {
-      files: ["test/**/*.js"]
+      files: ['test/**/*.js']
     },
     lint: {
-      files: ["grunt.js", "tasks/**/*.js", "test/**/*.js"]
-    },
-    wieldyjs: {
-      dist: {
-        src: "example-wml/markup-test.wml",
-        dest: "example-html/markup-test.html"
-      }
+      files: ['grunt.js', 'tasks/**/*.js', 'test/**/*.js']
     },
     watch: {
-      files: "<config:lint.files>",
-      tasks: "default"
+      files: '<config:lint.files>',
+      tasks: 'default'
+    },
+    wieldyjs: {
+      compile: {
+        src: 'src/**/*.wml',
+        dest: 'dest/',
+        options: {
+          basePath: 'src/'
+        }
+      }
     },
     jshint: {
       options: {
@@ -40,7 +40,10 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.loadTasks("tasks");
+  // Load local tasks.
+  grunt.loadTasks('tasks');
 
-  grunt.registerTask("default", "lint test");
+  // Default task.
+  grunt.registerTask('default', 'wieldyjs');
+
 };

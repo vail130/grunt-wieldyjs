@@ -27,12 +27,11 @@ An example configuration looks like this:
 ```js
 grunt.initConfig({
   wieldyjs: {
-    dist: {
-      src: "example-wml/*.wml",
-      dest: "example-html/*.html",
-
+    compile: {
+      src: 'src/**/*.wml',
+      dest: 'dest/',
       options: {
-        // see below for options. this is optional.
+        basePath: 'src/'
       }
     }
   }

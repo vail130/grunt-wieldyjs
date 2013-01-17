@@ -1,7 +1,7 @@
 {
   "name": "grunt-wieldyjs",
   "description": "Grunt task to render WieldyMarkup templates to HTML",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "homepage": "",
   "author": {
     "name": "Vail Gold",
@@ -28,6 +28,6 @@
     "wieldyjs": "*"
   },
   "keywords": [
-    "gruntplugin", "wieldyjs", "wieldyjs"
+    "gruntplugin", "wieldymarkup", "wieldyjs"
   ]
 }
