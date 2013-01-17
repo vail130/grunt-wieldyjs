@@ -1,6 +1,6 @@
 /*
  * Grunt WieldyJS
- * https://github.com/vail130/grunt-wieldymark
+ * https://github.com/vail130/grunt-wieldyjs
  *
  * Copyright (c) 2013 Vail Gold
  * Licensed under the MIT license.
@@ -35,14 +35,16 @@ module.exports = function(grunt) {
       }
 
       if(filePath.charAt(0) !== "/") {
-        filePath = (opts.basePath || ".") + "/" + filePath;
+        filePath = "./" + filePath;
       }
       
-      var data = fs.readFileSync(filePath, "utf8");
-      var html = new WieldyJS(data).output;
-      grunt.file.write(dest, html);
-      grunt.log.writeln('File "' + dest + '" created.');
-      done();
+      fs.readFileSync(filePath, "utf8", function(err, data) {
+        if(err) { return }
+        var html = new WieldyJS(data).output;
+        grunt.file.write(dest, html);
+        grunt.log.writeln('File "' + dest + '" created.');
+        done();
+      });
     });
   });
 

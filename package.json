@@ -1,7 +1,7 @@
 {
   "name": "grunt-wieldyjs",
   "description": "Grunt task to render WieldyMarkup templates to HTML",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "homepage": "",
   "author": {
     "name": "Vail Gold",
@@ -10,10 +10,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/vail130/grunt-wieldymarkup.git"
+    "url": "git://github.com/vail130/grunt-wieldyjs.git"
   },
   "bugs": {
-    "url": "https://github.com/vail130/grunt-wieldymarkup/issues"
+    "url": "https://github.com/vail130/grunt-wieldyjs/issues"
   },
   "main": "grunt.js",
   "bin": "bin/grunt-wieldyjs",
@@ -28,6 +28,6 @@
     "wieldyjs": "*"
   },
   "keywords": [
-    "gruntplugin", "wieldymarkup", "wieldyjs"
+    "gruntplugin", "wieldyjs", "wieldyjs"
   ]
 }

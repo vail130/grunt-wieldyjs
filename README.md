@@ -26,10 +26,10 @@ An example configuration looks like this:
 
 ```js
 grunt.initConfig({
-  dusthtml: {
+  wieldyjs: {
     dist: {
-      src: "example-wml/markup-test.wml",
-      dest: "example-html/markup-test.html",
+      src: "example-wml/*.wml",
+      dest: "example-html/*.html",
 
       options: {
         // see below for options. this is optional.

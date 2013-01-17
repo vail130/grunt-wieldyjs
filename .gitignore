@@ -1,2 +1,4 @@
 .komodotools/
 *.komodoproject
+node_modules/
+.DS_Store

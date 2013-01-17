@@ -1,5 +1,7 @@
 module.exports = function(grunt) {
   "use strict";
+  
+  grunt.loadNpmTasks('grunt-wieldyjs');
 
   // Project configuration.
   grunt.initConfig({
@@ -8,6 +10,12 @@ module.exports = function(grunt) {
     },
     lint: {
       files: ["grunt.js", "tasks/**/*.js", "test/**/*.js"]
+    },
+    wieldyjs: {
+      dist: {
+        src: "example-wml/markup-test.wml",
+        dest: "example-html/markup-test.html"
+      }
     },
     watch: {
       files: "<config:lint.files>",
