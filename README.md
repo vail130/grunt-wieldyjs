@@ -1,6 +1,7 @@
-## About
 
-This task renders WieldyMarkup templates into HTML.
+# Grunt Task for WieldyMarkup
+
+This repo is a grunt task for rendering [WieldyMarkup](https://github.com/vail130/wieldymarkup-js) templates. Integrate with [Yeoman](http://yeoman.io) for a better workflow!
 
 ## Getting Started
 
@@ -20,7 +21,14 @@ Lastly, add the configuration settings (see below) to your grunt file.
 
 ## Documentation
 
-This task has two required properties, `src` and `dest`. `src` is the path to your source file and `dest` is the file this task will write to (relative to the grunt.js file). If this file already exists **it will be overwritten**.
+This task has two required properties, `src` and `dest`, and one optional property, `options`:
+
+* `src` should be a glob matching all files.
+* `dest` should be a directory in which to reproduce the directory tree of files matching the `src` glob.
+* Both `src` and `dest` will be evaluated relative to the grunt.js file.
+* Files matching `src` will overwrite files in the `dest` directory.
+* `options` should be an object with key-value pairs.
+* The only currently supported option is `basePath`, which should be the prefix to remove from the path of files matching `src`.
 
 An example configuration looks like this:
 
@@ -37,8 +45,3 @@ grunt.initConfig({
   }
 });
 ```
-
-### Optional Configuration Properties
-
-TBD
-

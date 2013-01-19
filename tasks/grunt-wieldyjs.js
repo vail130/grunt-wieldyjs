@@ -17,9 +17,10 @@ module.exports = function(grunt) {
         return grunt.fatal("Invalid target.");
       }
       
-      var src = this.data.src;
-      var dest = this.data.dest;
-      var options = this.data.options || '';
+      var src = this.data.src
+        , dest = this.data.dest
+        , options = this.data.options || ''
+        ;
       
       if(!src) {
         return grunt.fatal("Missing src property.");
@@ -28,33 +29,71 @@ module.exports = function(grunt) {
         return grunt.fatal("Missing dest property.");
       }
       
-      var WieldyJS = require('wieldyjs').Compiler;
-      var path = require("path");
-      var fs = require("fs");
-      var done = this.async();
+      var WieldyJS = require('wieldyjs').Compiler
+        , done = this.async()
+        ;
       
       grunt.file.expandFiles(src).forEach(function(filePath) {
-        if(path.extname(filePath) !== '.wml') {
-          return;
-        }
+        var data = grunt.helper('validateAndReadFile', filePath)
+          , outputFilePath = grunt.helper(
+              'getOutputFileFromInputFile', filePath, dest, options.basePath
+            )
+          , html = new WieldyJS(data).output
+          ;
         
-        grunt.log.writeln(filePath);
-        
-        fs.readFile(filePath, "utf8", function(err, data) {
-          if(err) {
-            return grunt.log.writeln(err);
-          }
-          
-          var output = dest + path.basename(
-              filePath.substr(options.basePath.length), '.wml'
-            ) + '.html';
-          
-          var html = new WieldyJS(data).output;
-          grunt.file.write(output, html);
-          grunt.log.writeln('File "' + output + '" created.');
-          done();
-        });
+        grunt.file.write(outputFilePath, html);
+        done();
       });
+    }
+  );
+  
+  grunt.registerHelper('validateAndReadFile', function(filePath) {
+    if (!filePath || filePath + '' === '') {
+      return {
+        status: 'failure',
+        result: "Empty file path."
+      };
+    }
+    var fs = require("fs")
+      , path = require("path");
+    
+    if(!fs.existsSync(filePath)) {
+      return {
+        status: 'failure',
+        result: "Invalid file path."
+      };
+    }
+    if(path.extname(filePath) !== '.wml') {
+      return {
+        status: 'failure',
+        result: "Invalid file extension."
+      };
+    }
+    return {
+      status: 'success',
+      result: fs.readFileSync(filePath, "utf8")
+    };
+  });
+  
+  grunt.registerHelper(
+    'getOutputFileFromInputFile',
+      function(filePath, dest, basePath) {
+      var path = require("path")
+        , basePathIndex = filePath.indexOf(basePath)
+        , filePathSections = path.normalize(filePath).split('/')
+        , fileParentPath = filePathSections
+                            .slice(0, filePathSections.length - 1)
+                            .join('/') + '/'
+        ;
+      
+      if(basePath != '' && basePathIndex > -1) {
+        fileParentPath = fileParentPath.substr(0, basePathIndex) +
+          fileParentPath.substr(basePathIndex + basePath.length);
+      }
+      return dest +
+        fileParentPath +
+        path.basename(filePath, '.wml') +
+        '.html';
     }
   );
 
