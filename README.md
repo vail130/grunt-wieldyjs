@@ -1,5 +1,5 @@
 
-# Grunt Task for WieldyMarkup
+# Grunt Task for WieldyMarkup [![Build Status](https://secure.travis-ci.org/vail130/grunt-wieldyjs.png)](http://travis-ci.org/vail130/grunt-wieldyjs)
 
 This repo is a grunt task for rendering [WieldyMarkup](https://github.com/vail130/wieldymarkup-js) templates. Integrate with [Yeoman](http://yeoman.io) for a better workflow!
 
