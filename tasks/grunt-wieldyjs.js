@@ -55,9 +55,13 @@ module.exports = function(grunt) {
       };
     }
     var fs = require("fs")
-      , path = require("path");
+      , path = require("path")
+      , existsSync = (typeof fs.existsSync == 'function')
+          ? fs.existsSync
+          : path.existsSync
+      ;
     
-    if(!fs.existsSync(filePath)) {
+    if(!existsSync(filePath)) {
       return {
         status: 'failure',
         result: "Invalid file path."
